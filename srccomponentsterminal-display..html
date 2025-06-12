@@ -1,0 +1,93 @@
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../style.css">
+    <base target="_parent">
+    <title data-trilium-title>src/components/terminal-display.tsx</title>
+  </head>
+  
+  <body>
+    <div class="content">
+       <h1 data-trilium-h1>src/components/terminal-display.tsx</h1>
+
+      <div class="ck-content"><pre><code class="language-text-plain">
+"use client";
+
+import * as React from "react";
+import type { LogEntry } from "@/types";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { cn } from "@/lib/utils";
+import { Badge } from "@/components/ui/badge";
+import { AlertTriangle, CheckCircle, Info, Terminal } from "lucide-react";
+
+interface TerminalDisplayProps {
+  entries: LogEntry[];
+}
+
+export function TerminalDisplay({ entries }: TerminalDisplayProps) {
+  const scrollAreaViewportRef = React.useRef&lt;HTMLDivElement&gt;(null);
+
+  React.useEffect(() =&gt; {
+    if (scrollAreaViewportRef.current) {
+      scrollAreaViewportRef.current.scrollTo({
+        top: scrollAreaViewportRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  }, [entries]);
+
+  const getEntryIcon = (type: LogEntry['type']) =&gt; {
+    switch(type) {
+      case 'command': return &lt;Terminal className="h-3.5 w-3.5 text-terminal-command-prompt inline-block mr-1 relative -top-px" /&gt;;
+      case 'error': return &lt;AlertTriangle className="h-3.5 w-3.5 text-terminal-error-text inline-block mr-1 relative -top-px" /&gt;;
+      case 'status': return &lt;CheckCircle className="h-3.5 w-3.5 text-green-400 inline-block mr-1 relative -top-px" /&gt;; // Using a specific color for status
+      case 'system': return &lt;Info className="h-3.5 w-3.5 text-blue-400 inline-block mr-1 relative -top-px" /&gt;; // Using a specific color for system
+      default: return null;
+    }
+  }
+
+  return (
+    &lt;div className="flex-grow flex flex-col bg-terminal-background text-terminal-foreground shadow-xl rounded-lg overflow-hidden font-code"&gt;
+      &lt;div className="p-3 sm:p-4 border-b border-terminal-background brightness-125 flex justify-between items-center"&gt;
+        &lt;h2 className="text-base sm:text-lg font-headline text-terminal-foreground"&gt;Session Log&lt;/h2&gt;
+        &lt;Badge variant="outline" className="border-terminal-foreground/30 text-terminal-foreground/70 bg-terminal-background brightness-125"&gt;Live&lt;/Badge&gt;
+      &lt;/div&gt;
+      &lt;ScrollArea className="flex-grow" viewportRef={scrollAreaViewportRef}&gt;
+        &lt;div className="p-3 sm:p-4 text-xs sm:text-sm space-y-2"&gt;
+          {entries.map((entry) =&gt; (
+            &lt;div key={entry.id} className="whitespace-pre-wrap break-words leading-relaxed flex items-start"&gt;
+              &lt;span className="text-terminal-foreground/60 mr-2 select-none shrink-0"&gt;
+                [{new Date(entry.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}]
+              &lt;/span&gt;
+              &lt;div className="flex-grow"&gt;
+                {getEntryIcon(entry.type)}
+                &lt;span
+                  className={cn({
+                    "text-terminal-command-text": entry.type === "command",
+                    "text-terminal-output-text": entry.type === "output",
+                    "text-terminal-error-text": entry.type === "error",
+                    "text-green-400": entry.type === "status", // Explicit color for status
+                    "text-blue-400": entry.type === "system", // Explicit color for system
+                  })}
+                &gt;
+                  {entry.content}
+                &lt;/span&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          ))}
+          {entries.length === 0 &amp;&amp; (
+            &lt;p className="text-terminal-foreground/70 italic"&gt;No activity yet. Start the listener and connect a shell.&lt;/p&gt;
+          )}
+        &lt;/div&gt;
+      &lt;/ScrollArea&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+      </div>
+    </div>
+  </body>
+
+</html>

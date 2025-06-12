@@ -1,0 +1,143 @@
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../style.css">
+    <base target="_parent">
+    <title data-trilium-title>src/app/globals.css</title>
+  </head>
+  
+  <body>
+    <div class="content">
+       <h1 data-trilium-h1>src/app/globals.css</h1>
+
+      <div class="ck-content"><pre><code class="language-text-plain">
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer base {
+  :root {
+    --background: 210 29% 96%; /* Light Gray #F0F4F8 */
+    --foreground: 220 15% 25%; /* Darker Gray for text on light background */
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 15% 25%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 15% 25%;
+
+    --primary: 207 82% 68%; /* Soft Blue #64B5F6 */
+    --primary-foreground: 220 25% 15%; /* Darker blue/gray for text on primary blue */
+
+    --secondary: 210 30% 90%; /* Lighter gray for secondary elements */
+    --secondary-foreground: 220 15% 25%;
+
+    --muted: 210 30% 90%;
+    --muted-foreground: 220 10% 45%; /* Muted text */
+
+    --accent: 33 100% 63%; /* Subtle Orange #FFAB40 */
+    --accent-foreground: 30 95% 25%; /* Dark brown/orange for text on accent */
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 210 20% 85%;
+    --input: 210 20% 90%; /* Input background */
+    --ring: 207 82% 68%; /* Ring color, same as primary */
+
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+
+    /* Sidebar variables - can remain default or be adjusted if sidebar is used later */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Terminal specific colors */
+    --terminal-background: 220 13% 18%; /* Dark cool gray e.g., #262b33 */
+    --terminal-foreground: 210 15% 85%; /* Light gray for terminal text e.g., #ccd5e0 */
+    --terminal-command-input-bg: 220 13% 22%; /* Slightly lighter dark for input bg */
+    --terminal-command-prompt: 207 82% 75%; /* Lighter Soft Blue for '$' prompt */
+    --terminal-command-text: 120 60% 70%; /* Greenish for command text */
+    --terminal-output-text: var(--terminal-foreground);
+    --terminal-error-text: var(--accent);   /* Orange for errors */
+  }
+
+  .dark {
+    /* Define dark mode if necessary, current request implies a light page theme with a dark terminal component */
+    --background: 220 13% 10%;
+    --foreground: 210 15% 85%;
+
+    --card: 220 13% 18%;
+    --card-foreground: 210 15% 85%;
+
+    --popover: 220 13% 18%;
+    --popover-foreground: 210 15% 85%;
+
+    --primary: 207 82% 68%;
+    --primary-foreground: 220 25% 15%;
+
+    --secondary: 220 13% 25%;
+    --secondary-foreground: 210 15% 85%;
+
+    --muted: 220 13% 25%;
+    --muted-foreground: 210 10% 65%;
+
+    --accent: 33 100% 63%;
+    --accent-foreground: 30 95% 25%;
+
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 220 13% 30%;
+    --input: 220 13% 30%;
+    --ring: 207 82% 68%;
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --terminal-background: 220 13% 18%;
+    --terminal-foreground: 210 15% 85%;
+    --terminal-command-input-bg: 220 13% 22%;
+    --terminal-command-prompt: 207 82% 75%;
+    --terminal-command-text: 120 60% 70%;
+    --terminal-output-text: var(--terminal-foreground);
+    --terminal-error-text: var(--accent);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+</code></pre>
+      </div>
+    </div>
+  </body>
+
+</html>
